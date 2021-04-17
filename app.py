@@ -11,10 +11,25 @@ import webcam
 st.sidebar.header(PROJECT_NAME)
 st.sidebar.write(AUTHOR)
 
+testData = 'test.csv'
+trainData = 'train.csv'
+
 choice = st.sidebar.radio("Project Menu",MENU_OPTIONS)
 
 if choice =='view data':
+    
+
+    def load_data5_Diesel(rows = None):
+        data = pd.read_csv(testData,index_col='id')
+        return data
+
+    data_load_state = st.text('loading fuel data...')
+
+    dataTest = load_data_test()
+
     st.title("View raw data")
+
+    st.write(dataTest)
 
 if choice =='view stats':
     st.title('View Statistics in Dataset')
