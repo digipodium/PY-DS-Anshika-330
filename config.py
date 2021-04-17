@@ -1,3 +1,3 @@
-PROJECT_NAME = 'Awesome Project'
+PROJECT_NAME = 'Mobile Price Prediction'
 AUTHOR = 'Tabish Qidwai'
-MENU_OPTIONS = ['view data','view stats','visualize','upload','prediction','history','about']
+MENU_OPTIONS = ['view data','view stats','visualize','prediction','history','about']
