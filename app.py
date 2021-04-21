@@ -12,8 +12,8 @@ import pickle
 st.sidebar.header(PROJECT_NAME)
 st.sidebar.write(AUTHOR)
 
-testData = 'test.csv'
-trainData = 'train.csv'
+testData = 'datasets/test.csv'
+trainData = 'datasets/train.csv'
 
 choice = st.sidebar.radio("Project Menu",MENU_OPTIONS)
 
@@ -132,8 +132,7 @@ if choice =='prediction':
             model = pickle.load(f)
 
         if model:
-            data = [battery_power,blue,clock_speed,fc,dual_sim,four_g,int_memory,m_dep,mobile_wt,n_cores,pc,px_height,px_width,ram,sc_h,sc_w,talk_time,three_g,touch_screen,wifi]
-            features = np.array(data)
+            features = np.array([battery_power,blue,clock_speed,fc,dual_sim,four_g,int_memory,m_dep,mobile_wt,n_cores,pc,px_height,px_width,ram,sc_h,sc_w,talk_time,three_g,touch_screen,wifi])
             prediction = model.predict(features)
             st.header("predicted Price")
             st.write('0(low cost), 1(medium cost), 2(high cost) and 3(very high cost)')
