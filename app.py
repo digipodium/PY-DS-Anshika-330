@@ -28,7 +28,7 @@ def load_data_train(rows = None):
 dataTest = load_data_test()
 dataTrain = load_data_train()
 
-if choice =='view data':
+if choice =='View data':
 
     st.title("View raw data")
     
@@ -38,7 +38,7 @@ if choice =='view data':
     st.write('Test Dataset')
     st.write(dataTest)
 
-if choice =='view stats':
+if choice =='View stats':
     st.title('View Statistics in Dataset')
     
     st.write('Train Dataset')
@@ -49,7 +49,7 @@ if choice =='view stats':
     describetest = dataTest.describe()
     st.write(describetest)
 
-if choice =='visualize':
+if choice =='Visualize':
     st.title("Graphs and charts")
     st.write('All visualization are on Training data')
 
@@ -69,7 +69,6 @@ if choice =='visualize':
     st.plotly_chart(fig)
 
     st.subheader("Column Comparison through scatter plot")
-    st.write(dataTrain.head())
     xcolumn = st.selectbox("select a column from the dataset for comparison", dataTrain.columns)
     ycolumn1 = st.selectbox("select a first column for comparision with first column selected", dataTrain.columns)
     ycolumn2 = st.selectbox("select a second column for comparosion with first column selected", dataTrain.columns)
@@ -91,7 +90,7 @@ if choice =='visualize':
     fig = px.scatter(dataTrain,x=xcol, y=ycol,color='price_range')
     st.plotly_chart(fig,use_container_width=True)
 
-    st.subheader("Pie chart comparision of vehicle")
+    st.subheader("Pie chart comparision of mobile")
     dataTrain.n_cores.value_counts().head().plot(kind='pie')
     st.pyplot()
 
@@ -101,7 +100,7 @@ if choice =='visualize':
     sns.jointplot(x=xcolm, y=ycolm, data=dataTrain)
     st.pyplot()
 
-if choice =='prediction':
+if choice =='Prediction':
     st.title('Use AI to predict')
     st.subheader('fill the detail and get result')
     
@@ -126,6 +125,8 @@ if choice =='prediction':
     touch_screen = st.number_input('Has touch screen or not',min_value=0, max_value=1)
     wifi = st.number_input('as wifi or not',min_value=0, max_value=1)
 
+    #st.write(clock_speed, type(clock_speed))
+
     clicked = st.button("make mobile price Prediction")
     if clicked:
         with open('models/mobile_price_prediction.pk','rb') as f:
@@ -133,16 +134,22 @@ if choice =='prediction':
 
         if model:
             features = np.array([battery_power,blue,clock_speed,fc,dual_sim,four_g,int_memory,m_dep,mobile_wt,n_cores,pc,px_height,px_width,ram,sc_h,sc_w,talk_time,three_g,touch_screen,wifi])
-            prediction = model.predict(features)
+            prediction = model.predict(features.reshape(1.-1))
             st.header("predicted Price")
             st.write('0(low cost), 1(medium cost), 2(high cost) and 3(very high cost)')
             st.success(prediction[0])
 
-if choice =='about':
+if choice =='About':
     st.title('About the project')
     #st.image('img.png')
-    st.write("""Most user management systems have some sort of main page, usually known as a dashboard. You’ll create a dashboard in this section, but because it won’t be the only page in your application, you’ll also create a base template to keep the looks of the website consistent.
-You won’t use any of Django’s advanced template features, but if you need a refresher on the template syntax, then you might want to check out Django’s template documentation""")
+    st.write("""Maximum accuracy achieved in this specific dataset is 92 %, and features selected are 
+    battery_power, blue, clock_speed, fc, dual_sim, four_g, int_memory, m_dep, mobile_wt, n_cores, pc, 
+    px_height, px_width, ram, sc_h, sc_w, talk_time,  three_g, touch_screen,wifi.""")
+    st.write("""Price in the Price is the most effective attribute of marketing and business. The very first question of costumer is about the price of items. All the costumers are first worried and thinks “If he would be able to purchase something with given specifications or not”. So to estimate price at home is the basic purpose of the work. This paper is only the first step toward the above-mentioned destination. Artificial Intelligence-which makes machine capable to answer the questions intelligently- now a days is very vast engineering field. Machine learning provides us best techniques for artificial intelligence like classification, regression, supervised learning and unsupervised learning and many more. Different tools are available for machine learning tasks like MATLAB, Python, Cygwin, WEKA etc. We can use any of classifiers like Decision tree, Naïve Bayes and many more. Different type of feature selection algorithms are available to select only best features and minimize dataset. This will reduce computational complexity of the problem. As this is optimization problem so many optimization techniques are also used to reduce dimensionality of the dataset. Mobile now a days is one of the most selling and purchasing device. Every day new mobiles with new version and more features are launched. Hundreds and thousands of mobile are sold and purchased on daily basis. So here the mobile price class prediction is a case study for the given type of problem i.e. finding optimal product. The same work can be done to estimate real price of all products like cars, bikes, generators, motors, food items, medicine etc.  
+Many features are very important to be considered to estimate price of mobile. For example Processor of the mobile. Battery timing is also very important in todays busy schedule of human being. Size and thickness of the mobile are also important decision factors. Internal memory, Camera pixels, and video quality must be under consideration. Internet browsing is also one of the most important constraints in this technological era of 21st century. And so is the list of many features based upon those, mobile price is decided. So we will use many of above mentioned features to classify whether the mobile would be very economical, economical, expensive or very expensive.
+""")
+
+    
 
 
 
