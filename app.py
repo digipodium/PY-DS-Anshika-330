@@ -134,7 +134,7 @@ if choice =='Prediction':
 
         if model:
             features = np.array([battery_power,blue,clock_speed,fc,dual_sim,four_g,int_memory,m_dep,mobile_wt,n_cores,pc,px_height,px_width,ram,sc_h,sc_w,talk_time,three_g,touch_screen,wifi])
-            prediction = model.predict(features.reshape(1.-1))
+            prediction = model.predict(features.reshape(1,-1))
             st.header("predicted Price")
             st.write('0(low cost), 1(medium cost), 2(high cost) and 3(very high cost)')
             st.success(prediction[0])
